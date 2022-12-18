@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<oslc4j_tc:Toolchain xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oslc4j_ai="http://org.eclipse.lyo/oslc4j/adaptorInterface" xmlns:oslc4j_tc="http://org.eclipse.lyo/oslc4j/toolChain" name="File System">
+  <adaptorInterfaces name="FileSystem">
+    <serviceProviderCatalog title="Service Provider Catalog" description="Enable OSLC clients to find Service Providers offered">
+      <serviceProviders title="Service Provider" description=" is a container of resources that is hosted by a tool or product">
+        <services domainSpecification="//@specification/@domainSpecifications[name='File%20System']">
+          <creationFactories title="CreationFactory" label="CreationFactory" creationURI="create" resourceTypes="_HXi70X3zEe29AP_nVLJpXg"/>
+          <queryCapabilities title="QueryCapability" label="QueryCapability" queryBaseURI="query" resourceTypes="_HXi70X3zEe29AP_nVLJpXg"/>
+          <selectionDialogs title="SelectionDialog" label="SelectionDialog" dialogURI="selector" hintWidth="250" hintHeight="250" resourceTypes="_HXi70X3zEe29AP_nVLJpXg"/>
+        </services>
+      </serviceProviders>
+    </serviceProviderCatalog>
+    <webServices name="WebService_FileExposure" serviceUrlPattern="files" resourceUrlPattern="{file_id}" resourceTypes="_HXi70X3zEe29AP_nVLJpXg"/>
+    <requiredAdaptors xsi:type="oslc4j_ai:GenericRequiredAdaptor" serviceProviderCatalogURI="http://your.host.com/adaptor/oslc/catalog/singleton" name="Generic Required Adaptor"/>
+    <configuration xsi:type="oslc4j_ai:MavenServerConfiguration" rootServerBaseUrl="http://localhost:8181/" applicationContextPath="/filesystem-connector" servletUrlPattern="/oslc/*" generateJspFilesForOslcUI="true" jettyPort="8181">
+      <generalConfiguration filesBasePath="../filesystem-oslc-connector-webapp/" javaBasePackageName="com.krusty84.fileconnector"/>
+      <projectConfiguration xsi:type="oslc4j_ai:MavenProjectConfiguration" lyoVersion="5.0.0.Final" groupId="com.krusty84.fileconnector" artifactId="fileconnector" version="0.0.1-SNAPSHOT"/>
+    </configuration>
+  </adaptorInterfaces>
+  <specification>
+    <domainSpecifications name="File System" namespaceURI="http://your.organisation.domain/oslc_fsnsp#" namespacePrefix="//@specification/@domainPrefixes[name='oslc_fsnsp']">
+      <resources id="_HXi70X3zEe29AP_nVLJpXg" name="File" description="The resource represents real file(-s) on file system" resourceProperties="_HXi70H3zEe29AP_nVLJpXg _tlYTYH30Ee29AP_nVLJpXg"/>
+      <resourceProperties id="_HXi70H3zEe29AP_nVLJpXg" name="FileName" valueType="String"/>
+      <resourceProperties id="_tlYTYH30Ee29AP_nVLJpXg" name="LastModifiedTime" valueType="DateTime"/>
+    </domainSpecifications>
+    <domainPrefixes name="oslc_fsnsp"/>
+  </specification>
+  <vocabularies/>
+</oslc4j_tc:Toolchain>
