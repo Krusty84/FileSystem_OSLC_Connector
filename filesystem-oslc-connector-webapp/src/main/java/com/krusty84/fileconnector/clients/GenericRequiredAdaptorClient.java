@@ -17,7 +17,7 @@
 
 package com.krusty84.fileconnector.clients;
 
-import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response; 
 import org.eclipse.lyo.client.OSLCConstants;
 import org.eclipse.lyo.client.OslcClient;
 import org.eclipse.lyo.oslc4j.core.model.ServiceProviderCatalog;

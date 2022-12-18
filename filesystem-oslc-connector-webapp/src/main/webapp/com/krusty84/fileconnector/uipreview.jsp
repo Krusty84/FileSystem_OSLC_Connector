@@ -19,10 +19,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <%@ page contentType="text/html" language="java" pageEncoding="UTF-8" %>
-
+ <%--krusty84, was added after generate boilerplate code
+  it needs for capturing attributes value from httpRequest--%>
 <%
   String resourceTitle = (String) request.getAttribute("resourceTitle");
   String resourcePreviewDataSet = (String) request.getAttribute("resourcePreviewDataSet");
+
+  String currentFileName = (String) request.getAttribute("Current File:");
+  java.util.Date lastModDate = (java.util.Date)request.getAttribute("Last Mod Date:");
+
 %>
 
 <html lang="en">

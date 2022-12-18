@@ -190,8 +190,11 @@ public class WebService_FileExposure
         if (aFile != null) {
             httpServletRequest.setAttribute("aFile", aFile);
             // Start of user code getFileAsHtml_setAttributes
+            /*krusty84, was added after generate boilerplate code
+            it needs for transfer some variables into jsp page*/
+            httpServletRequest.setAttribute("Current File:", aFile.getFileName());
+            httpServletRequest.setAttribute("Last Mod Date:", aFile.getLastModifiedTime());
             // End of user code
-
             httpServletRequest.setAttribute("aResource", aFile);
             httpServletRequest.setAttribute("resourceTypeName", Oslc_fsnspDomainConstants.FILE_LOCALNAME);
             httpServletRequest.setAttribute("shapeUri", UriBuilder.fromUri(OSLC4JUtils.getServletURI()).path(OslcConstants.PATH_RESOURCE_SHAPES).path(Oslc_fsnspDomainConstants.FILE_PATH).build());
@@ -225,7 +228,7 @@ public class WebService_FileExposure
     {
         String iconUri = OSLC4JUtils.getPublicURI() + "/images/ui_preview_icon.gif";
         String smallPreviewHintHeight = "200px";
-        String smallPreviewHintWidth = "300px";
+        String smallPreviewHintWidth = "600px";
         String largePreviewHintHeight = "400px";
         String largePreviewHintWidth = "600px";
 
@@ -241,7 +244,7 @@ public class WebService_FileExposure
             compact.setAbout(aFile.getAbout());
             compact.setTitle(aFile.toString());
             compact.setIcon(new URI(iconUri));
-
+            
             //Create and set attributes for OSLC preview resource
             final Preview smallPreview = new Preview();
             smallPreview.setHintHeight(smallPreviewHintHeight);
@@ -255,11 +258,12 @@ public class WebService_FileExposure
             largePreview.setDocument(UriBuilder.fromUri(aFile.getAbout()).path("largePreview").build());
             compact.setLargePreview(largePreview);
 
-            httpServletResponse.addHeader(ServerConstants.HDR_OSLC_VERSION, ServerConstants.OSLC_VERSION_V2);
-            /*krusty84. was added after generate boilerplate code
-        	*/
-            httpServletResponse.addHeader("Current File","");
-            httpServletResponse.addHeader("Last Mod Date","");
+            httpServletResponse.addHeader(ServerConstants.HDR_OSLC_VERSION, ServerConstants.OSLC_VERSION_V2);            
+            /*krusty84, was added after generate boilerplate code
+            it needs for transfer some variables into jsp page*/
+            httpServletRequest.setAttribute("Current File:", aFile.getFileName());
+            httpServletRequest.setAttribute("Last Mod Date:", aFile.getLastModifiedTime());
+            //
             addCORSHeaders(httpServletResponse);
             return compact;
         }
@@ -285,10 +289,11 @@ public class WebService_FileExposure
 
             try {
                 httpServletRequest.setAttribute("resourceTitle", aFile.toString());
-                /*krusty84. was added after generate boilerplate code
-            	*/
-                httpServletResponse.addHeader("Current File","");
-                httpServletResponse.addHeader("Last Mod Date","");
+                /*krusty84, was added after generate boilerplate code
+                it needs for transfer some variables into jsp page*/
+                httpServletRequest.setAttribute("Current File:", aFile.getFileName());
+                httpServletRequest.setAttribute("Last Mod Date:", aFile.getLastModifiedTime());
+                //
                 ArrayList<String> getterMethodNames = new ArrayList<String>(Arrays.asList("getFileName", "getLastModifiedTime"));
                 // Start of user code getFileAsHtmlSmallPreview_setResourceGetterMethods
                 //TODO: modify the set of attributes to show in the preview
@@ -328,10 +333,11 @@ public class WebService_FileExposure
 
             try {
                 httpServletRequest.setAttribute("resourceTitle", aFile.toString());
-                /*krusty84. was added after generate boilerplate code
-            	*/
-                httpServletResponse.addHeader("Current File","");
-                httpServletResponse.addHeader("Last Mod Date","");
+                /*krusty84, was added after generate boilerplate code
+                it needs for transfer some variables into jsp page*/
+                httpServletRequest.setAttribute("Current File:", aFile.getFileName());
+                httpServletRequest.setAttribute("Last Mod Date:", aFile.getLastModifiedTime());
+                //
                 ArrayList<String> getterMethodNames = new ArrayList<String>(Arrays.asList("getFileName", "getLastModifiedTime"));
                 // Start of user code getFileAsHtmlLargePreview_setResourceGetterMethods
                 //TODO: modify the set of attributes to show in the preview

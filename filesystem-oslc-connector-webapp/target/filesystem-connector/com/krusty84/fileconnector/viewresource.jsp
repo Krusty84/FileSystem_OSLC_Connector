@@ -38,11 +38,17 @@
 
 <%@ page contentType="text/html" language="java" pageEncoding="UTF-8" %>
 
+ <%--krusty84, was added after generate boilerplate code
+  it needs for capturing attributes value from httpRequest--%>
+  
 <%
   AbstractResource aResource = (AbstractResource) request.getAttribute("aResource");
   String resourceTypeName = (String) request.getAttribute("resourceTypeName");
   URI shapeUri = (URI) request.getAttribute("shapeUri");
   String catalogUrl = UriBuilder.fromUri(OSLC4JUtils.getServletURI()).path("/catalog/singleton").build().toString();
+  
+  String currentFileName = (String) request.getAttribute("Current File:");
+  java.util.Date lastModDate = (java.util.Date)request.getAttribute("Last Mod Date:");
 %>
 <html lang="en">
 <head>
@@ -115,7 +121,26 @@
                 </ul>
             </div>
         </div>
-
+		<div class="row">
+            <div class="col-2 text-right">
+                <p class="font-weight-bold">Opened File</p>
+            </div>
+            <div class="col">
+                <p class="text-monospace">
+                    <a href="<%=currentFileName%>"><%=currentFileName%></a>
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2 text-right">
+                <p class="font-weight-bold">Last Modified Date</p>
+            </div>
+            <div class="col">
+                <p class="text-monospace">
+                    <a href="<%=lastModDate%>"><%=lastModDate%></a>
+                </p>
+            </div>
+        </div>
         <div class="row mt-3">
             <div class="col">
                 <h3>Resource-specific properties</h3>
