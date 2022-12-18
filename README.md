@@ -24,3 +24,6 @@ you may change the path to the exposing folder
 The web-app port: **8181**
 
 In Eclipse, create the new Run configuration for Maven Build, Goals: **clean install jetty:run**
+
+This connector was created based on the following project:
+https://github.com/OSLC/lyo-adaptor-sample-modelling/
