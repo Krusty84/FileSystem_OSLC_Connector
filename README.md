@@ -32,5 +32,5 @@ https://github.com/OSLC/lyo-adaptor-sample-modelling/
 **JDK 11** - https://jdk.java.net/archive
 
 ## Tips & Trick
-In some cases embedded Swager doesn't working (some troubles with loaded swagger*.js), for resolve it:
+In some cases embedded Swager doesn't working (some troubles with loading swagger*.js), for resolve it:
 copy all files from: ...\filesystem-oslc-connector-webapp\target\swagger-ui\META-INF\resources\webjars\swagger-ui\3.52.5\ to the ...\filesystem-oslc-connector-webapp\src\main\webapp\swagger-ui\dist\
