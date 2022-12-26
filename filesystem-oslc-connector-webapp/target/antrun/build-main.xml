@@ -2,7 +2,7 @@
 <project name="maven-antrun-" default="main"  >
 <target name="main">
   <exec vmlauncher="false" executable="start">
-    <arg line="http://localhost:8181/"/>
+    <arg line="http://localhost:8181/filesystem-connector/"/>
   </exec>
 </target>
 </project>

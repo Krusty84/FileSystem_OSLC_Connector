@@ -136,14 +136,14 @@
             <artifactId>oslc-client</artifactId>
             <version>${version.lyo}</version>
         </dependency>
-        <!-- Swagger dependencies -->
+       <!-- Swagger dependencies -->
         <dependency>
             <groupId>io.swagger.core.v3</groupId>
             <artifactId>swagger-jaxrs2</artifactId>
             <version>${swagger.version}</version>
             <exclusions>
                 <exclusion>
-                    <!-- should be <provided> -->
+                    <!--should be <provided>-->
                     <groupId>jakarta.activation</groupId>
                     <artifactId>jakarta.activation-api</artifactId>
                 </exclusion>
@@ -230,8 +230,8 @@
                 </configuration>
             </plugin>
             <!-- Swagger-ui -->
-            <plugin>
-                <!-- Download Swagger UI webjar. -->
+           <plugin>
+       <!-- Download Swagger UI webjar. -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
                 <version>3.1.2</version>
@@ -254,23 +254,23 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <!-- Add Swagger UI resources to the war file. -->
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>3.2.3</version>
-                <configuration>
-                    <webResources combine.children="append">
-                        <resource>
-                            <directory>${project.build.directory}/swagger-ui/META-INF/resources/webjars/swagger-ui/${swagger-ui.version}</directory>
-                            <includes>
-                                <include>**/*.*</include>
-                            </includes>
-                            <targetPath>/swagger-ui/dist</targetPath>
-                        </resource>
-                    </webResources>
-                </configuration>
-            </plugin>
+    <plugin>
+      <!-- Add Swagger UI resources to the war file. -->
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-war-plugin</artifactId>
+      <version>3.2.3</version>
+      <configuration>
+          <webResources combine.children="append">
+              <resource>
+                  <directory>${project.build.directory}/swagger-ui/META-INF/resources/webjars/swagger-ui/${swagger-ui.version}</directory>
+                  <includes>
+                      <include>**/*.*</include>
+                  </includes>
+                  <targetPath>/swagger-ui/dist</targetPath>
+              </resource>
+          </webResources>
+      </configuration>
+    </plugin>
             <plugin>
                 <artifactId>maven-antrun-plugin</artifactId>
                 <version>1.7</version>
@@ -282,7 +282,7 @@
                             <target>
                                 <exec executable="start"
                                       vmlauncher="false">
-                                    <arg line="http://localhost:8181/" />
+                                    <arg line="http://localhost:8181/filesystem-connector/" />
                                 </exec>
                             </target>
                         </configuration>
@@ -314,5 +314,6 @@
             </plugin>
         </plugins>
     </reporting>
+    
     <!-- End of user code -->
 </project>

@@ -35,7 +35,7 @@
             <param-name>javax.ws.rs.Application</param-name>
             <param-value>com.krusty84.fileconnector.servlet.Application</param-value>
         </init-param>
-        <load-on-startup>1</load-on-startup>
+        <load-on-startup>1</load-on-startup>  
     </servlet>
     <!-- Start of user code webxml3
     -->
