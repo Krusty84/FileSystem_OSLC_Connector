@@ -81,6 +81,7 @@ import com.krusty84.fileconnector.RestDelegate;
 import com.krusty84.fileconnector.ServerConstants;
 import com.krusty84.fileconnector.resources.Oslc_fsnspDomainConstants;
 import com.krusty84.fileconnector.resources.Oslc_fsnspDomainConstants;
+import com.krusty84.fileconnector.servlet.ApplicationBinder;
 import com.krusty84.fileconnector.servlet.ServiceProviderCatalogSingleton;
 import com.krusty84.fileconnector.resources.File;
 import com.krusty84.fileconnector.resources.FileSystemConnect_Helper;
@@ -115,6 +116,8 @@ public class ServiceProviderService1
     public ServiceProviderService1()
     {
         super();
+       //*krusty84, was added call to debug reason
+       System.out.println("Was Called: "+ServiceProviderService1.class);
        //*krusty84, was added call to get specific file in folder (aka ServiceProvider)
        FileSystemConnect_Helper.getFoldersContent(RestDelegate.pathToRootFolder, GlobalConstantsVariables.currentServiceProvider, RestDelegate.files);
     }
@@ -233,9 +236,7 @@ public class ServiceProviderService1
         if (resources!= null) {
             // Start of user code queryFilesAsHtml_setAttributes
             // End of user code
-        	/*krusty84. was added after generate boilerplate code
-        	*/
-            //for debug reason
+        	//*krusty84, was added call to debug reason
             System.out.println("The Query was called"+"_from: "+GlobalConstantsVariables.currentServiceProvider+" service provider");
             
             

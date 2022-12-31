@@ -90,7 +90,8 @@ public class ServletListener implements ServletContextListener  {
         // Start of user code contextInitialized_mid
         // TODO Implement code to establish connection to data backbone etc ...
         // End of user code
-        
+        //*krusty84, was added call to debug reason
+        System.out.println("Was Called: "+ServletListener.class);
         // Start of user code contextInitialized_final
         // End of user code
     }

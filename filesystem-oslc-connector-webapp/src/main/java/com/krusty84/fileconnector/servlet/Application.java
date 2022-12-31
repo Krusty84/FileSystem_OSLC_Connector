@@ -140,6 +140,9 @@ public class Application extends javax.ws.rs.core.Application {
         for (final Map.Entry<String, Class<?>> entry : RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.entrySet()) {
             ResourceShapeFactory.createResourceShape(BASE_URI, OslcConstants.PATH_RESOURCE_SHAPES, entry.getKey(), entry.getValue());
         }
+        
+        //*krusty84, was added call to debug reason
+        System.out.println("Was Called: "+Application.class);
     }
 
     @Override 

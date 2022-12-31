@@ -48,6 +48,8 @@ public class ApplicationBinder extends AbstractBinder {
     public ApplicationBinder()
     {
         log.info("HK2 contract binding init");
+        //*krusty84, was added call to debug reason
+        System.out.println("Was Called: "+ApplicationBinder.class);
     }
 
     @Override
