@@ -58,6 +58,7 @@ import javax.ws.rs.core.UriBuilder;
 
 import org.apache.wink.json4j.JSONException;
 import org.apache.wink.json4j.JSONObject;
+import org.apache.log4j.xml.DOMConfigurator;
 import org.apache.wink.json4j.JSONArray;
 import org.eclipse.lyo.oslc4j.provider.json4j.JsonHelper;
 import org.slf4j.Logger;
@@ -105,8 +106,8 @@ public class ServiceProviderService1
     @Context private UriInfo uriInfo;
     @Inject  private RestDelegate delegate;
 
-    private static final Logger log = LoggerFactory.getLogger(ServiceProviderService1.class);
-
+    //*krusty84, was added for using log4j
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(ServiceProviderService1.class.getSimpleName());
     // Start of user code class_attributes
     // End of user code
 
@@ -115,11 +116,13 @@ public class ServiceProviderService1
 
     public ServiceProviderService1()
     {
-        super();
+       super();
        //*krusty84, was added call to debug reason
        System.out.println("Was Called: "+ServiceProviderService1.class);
        //*krusty84, was added call to get specific file in folder (aka ServiceProvider)
        FileSystemConnect_Helper.getFoldersContent(RestDelegate.pathToRootFolder, GlobalConstantsVariables.currentServiceProvider, RestDelegate.files);
+       //*krusty84, was added for initialize log4j
+       DOMConfigurator.configure("src/main/resources/log4j.xml");
     }
 
     private void addCORSHeaders (final HttpServletResponse httpServletResponse) {
@@ -187,6 +190,8 @@ public class ServiceProviderService1
             uriBuilder.queryParam("oslc.prefix", prefix);
         }
         httpServletRequest.setAttribute("queryUri", uriBuilder.build().toString());
+        //*krusty84, was added for debug reason
+        logger.info("queryUri: "+uriBuilder.build().toString());
         if ((OSLC4JUtils.hasLyoStorePagingPreciseLimit() && resources.size() >= pageSize) 
             || (!OSLC4JUtils.hasLyoStorePagingPreciseLimit() && resources.size() > pageSize)) {
             resources = resources.subList(0, pageSize);
@@ -237,8 +242,9 @@ public class ServiceProviderService1
             // Start of user code queryFilesAsHtml_setAttributes
             // End of user code
         	//*krusty84, was added call to debug reason
-            System.out.println("The Query was called"+"_from: "+GlobalConstantsVariables.currentServiceProvider+" service provider");
-            
+            //System.out.println("The Query was called"+"_from: "+GlobalConstantsVariables.currentServiceProvider+" service provider");
+            //*krusty84, was added for debug reason
+            logger.info("The Query was called,from: "+GlobalConstantsVariables.currentServiceProvider);
             
             UriBuilder uriBuilder = UriBuilder.fromUri(uriInfo.getAbsolutePath())
                 .queryParam("oslc.paging", "true")
@@ -310,7 +316,7 @@ public class ServiceProviderService1
                 response.put("oslc:results", resourceArray);
                 return Response.ok(response.write()).build();
             }
-            log.error("A empty search should return an empty list and not NULL!");
+            logger.error("A empty search should return an empty list and not NULL! "+Status.INTERNAL_SERVER_ERROR);
             throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
 
         } else {

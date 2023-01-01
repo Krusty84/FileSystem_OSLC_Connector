@@ -28,6 +28,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.eclipse.lyo.oslc4j.core.model.ServiceProvider;
+import org.apache.log4j.xml.DOMConfigurator;
 import org.eclipse.lyo.oslc4j.core.OSLC4JUtils;
 import org.eclipse.lyo.oslc4j.core.model.AbstractResource;
 import com.krusty84.fileconnector.servlet.ServiceProviderCatalogSingleton;
@@ -35,6 +36,7 @@ import com.krusty84.fileconnector.ServiceProviderInfo;
 import com.krusty84.fileconnector.resources.File;
 import com.krusty84.fileconnector.resources.FileSystemConnect_Helper;
 import com.krusty84.fileconnector.resources.GlobalConstantsVariables;
+import com.krusty84.fileconnector.services.WebService_FileExposure;
 
 
 
@@ -46,7 +48,8 @@ import com.krusty84.fileconnector.resources.GlobalConstantsVariables;
 
 public class RestDelegate {
 
-    private static final Logger log = LoggerFactory.getLogger(RestDelegate.class);
+	//*krusty84, was added for using log4j
+	private static final org.slf4j.Logger logger = LoggerFactory.getLogger(RestDelegate.class.getSimpleName());
     //*krusty84, was added pathToRootFolder variable for specified path to the root of exposing folder
     public static String pathToRootFolder="C:\\Temp\\basicmass";
     public static Map<String,File> files = new HashMap<String, File>();
@@ -57,7 +60,9 @@ public class RestDelegate {
     // End of user code
     
     public RestDelegate() {
-        log.trace("Delegate is initialized");
+    	//*krusty84, was added for initialize log4j
+        DOMConfigurator.configure("src/main/resources/log4j.xml");
+        logger.trace("Delegate is initialized");
     }
     
     
@@ -129,7 +134,9 @@ public class RestDelegate {
          */
         FileSystemConnect_Helper.getFoldersContent(RestDelegate.pathToRootFolder, GlobalConstantsVariables.currentServiceProvider, RestDelegate.files);
         aResource= files.get(file_id);
-        System.out.println("Resource ID: "+file_id+" in Fact this is the file: "+aResource.getFileName());
+        //System.out.println("Resource ID: "+file_id+" in Fact this is the file: "+aResource.getFileName());
+        logger.info("Resource ID: "+file_id);
+        logger.info("In Fact this is the file: "+aResource.getFileName());
         // return 'null' if the resource was not found.
         // If you encounter problems, consider throwing the runtime exception WebApplicationException(message, cause, final httpStatus)
         // End of user code

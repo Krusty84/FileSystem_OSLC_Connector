@@ -30,6 +30,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.logging.FileHandler;
 
 import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
@@ -61,6 +62,8 @@ import org.apache.wink.json4j.JSONObject;
 import org.eclipse.lyo.oslc4j.provider.json4j.JsonHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.apache.log4j.PropertyConfigurator;
+import org.apache.log4j.xml.DOMConfigurator;
 import org.eclipse.lyo.oslc4j.core.OSLC4JUtils;
 import org.eclipse.lyo.oslc4j.core.annotation.OslcCreationFactory;
 import org.eclipse.lyo.oslc4j.core.annotation.OslcDialog;
@@ -80,6 +83,7 @@ import com.krusty84.fileconnector.ServerConstants;
 import com.krusty84.fileconnector.resources.Oslc_fsnspDomainConstants;
 import com.krusty84.fileconnector.servlet.ServiceProviderCatalogSingleton;
 import com.krusty84.fileconnector.resources.File;
+import com.krusty84.fileconnector.resources.FileSystemConnect_Helper;
 import com.krusty84.fileconnector.resources.GlobalConstantsVariables;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -99,9 +103,10 @@ public class WebService_FileExposure
     @Context private HttpServletResponse httpServletResponse;
     @Context private UriInfo uriInfo;
     @Inject  private RestDelegate delegate;
-
-    private static final Logger log = LoggerFactory.getLogger(WebService_FileExposure.class);
-
+    
+    //*krusty84, was added for using log4j
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(WebService_FileExposure.class.getSimpleName());
+    
     // Start of user code class_attributes
     // End of user code
 
@@ -111,6 +116,9 @@ public class WebService_FileExposure
     public WebService_FileExposure()
     {
         super();
+        //*krusty84, was added for initialize log4j
+        DOMConfigurator.configure("src/main/resources/log4j.xml");
+        
     }
 
     private void addCORSHeaders (final HttpServletResponse httpServletResponse) {
@@ -188,7 +196,7 @@ public class WebService_FileExposure
         /*krusty84, was added after generate boilerplate code
     	*/
         //for debug reason
-        System.out.println("The specific resource: "+aFile.getFileName()+" was called"+"_from: "+GlobalConstantsVariables.currentServiceProvider+" service provider");
+        //System.out.println("The specific resource: "+aFile.getFileName()+" was called"+"_from: "+GlobalConstantsVariables.currentServiceProvider+" service provider");
         
         if (aFile != null) {
             httpServletRequest.setAttribute("aFile", aFile);
@@ -197,6 +205,8 @@ public class WebService_FileExposure
             it needs for transfer some variables into jsp page*/
             httpServletRequest.setAttribute("Current File:", aFile.getFileName());
             httpServletRequest.setAttribute("Last Mod Date:", aFile.getLastModifiedTime());
+            logger.info("Current File: "+aFile.getFileName());
+            logger.info("Last Mod Date: "+aFile.getLastModifiedTime());
             // End of user code
             httpServletRequest.setAttribute("aResource", aFile);
             httpServletRequest.setAttribute("resourceTypeName", Oslc_fsnspDomainConstants.FILE_LOCALNAME);
@@ -205,7 +215,7 @@ public class WebService_FileExposure
             rd.forward(httpServletRequest,httpServletResponse);
             return;
         }
-
+        logger.error("Fatal Error:",Status.NOT_FOUND);
         throw new WebApplicationException(Status.NOT_FOUND);
     }
 
@@ -267,9 +277,12 @@ public class WebService_FileExposure
             httpServletRequest.setAttribute("Current File:", aFile.getFileName());
             httpServletRequest.setAttribute("Last Mod Date:", aFile.getLastModifiedTime());
             //
+            logger.info("Current File: "+aFile.getFileName());
+            logger.info("Last Mod Date: "+aFile.getLastModifiedTime());
             addCORSHeaders(httpServletResponse);
             return compact;
         }
+        logger.error("Fatal Error:",Status.NOT_FOUND);
         throw new WebApplicationException(Status.NOT_FOUND);
     }
 
@@ -297,6 +310,9 @@ public class WebService_FileExposure
                 httpServletRequest.setAttribute("Current File:", aFile.getFileName());
                 httpServletRequest.setAttribute("Last Mod Date:", aFile.getLastModifiedTime());
                 //
+                logger.info("Current File: "+aFile.getFileName());
+                logger.info("Last Mod Date: "+aFile.getLastModifiedTime());
+                //
                 ArrayList<String> getterMethodNames = new ArrayList<String>(Arrays.asList("getFileName", "getLastModifiedTime"));
                 // Start of user code getFileAsHtmlSmallPreview_setResourceGetterMethods
                 //TODO: modify the set of attributes to show in the preview
@@ -304,7 +320,7 @@ public class WebService_FileExposure
                 String oslcPreviewDataSetAsString = PreviewFactory.getPreviewAsJsonString(aFile, getterMethodNames, false);
                 httpServletRequest.setAttribute("resourcePreviewDataSet", oslcPreviewDataSetAsString);
             } catch (Exception e) {
-                log.error("Could not handle smallPreview", e);
+            	logger.error("Could not handle smallPreview: ",e);
                 throw new WebApplicationException("Could not handle smallPreview", e);
             }
             RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/com/krusty84/fileconnector/uipreview.jsp");
@@ -313,7 +329,7 @@ public class WebService_FileExposure
             rd.forward(httpServletRequest, httpServletResponse);
             return;
         }
-
+        logger.error("Fatal Error:",Status.NOT_FOUND);
         throw new WebApplicationException(Status.NOT_FOUND);
     }
 
@@ -341,6 +357,8 @@ public class WebService_FileExposure
                 httpServletRequest.setAttribute("Current File:", aFile.getFileName());
                 httpServletRequest.setAttribute("Last Mod Date:", aFile.getLastModifiedTime());
                 //
+                logger.info("Current File: "+aFile.getFileName());
+                logger.info("Last Mod Date: "+aFile.getLastModifiedTime());
                 ArrayList<String> getterMethodNames = new ArrayList<String>(Arrays.asList("getFileName", "getLastModifiedTime"));
                 // Start of user code getFileAsHtmlLargePreview_setResourceGetterMethods
                 //TODO: modify the set of attributes to show in the preview
@@ -348,7 +366,7 @@ public class WebService_FileExposure
                 String oslcPreviewDataSetAsString = PreviewFactory.getPreviewAsJsonString(aFile, getterMethodNames, true);
                 httpServletRequest.setAttribute("resourcePreviewDataSet", oslcPreviewDataSetAsString);
             } catch (Exception e) {
-                log.error("Could not handle largePreview", e);
+            	logger.error("Could not handle largePreview: ",e);
                 throw new WebApplicationException("Could not handle largePreview", e);
             }
             RequestDispatcher rd = httpServletRequest.getRequestDispatcher("/com/krusty84/fileconnector/uipreview.jsp");
@@ -357,7 +375,7 @@ public class WebService_FileExposure
             rd.forward(httpServletRequest, httpServletResponse);
             return;
         }
-
+        logger.error("Fatal Error: ",Status.NOT_FOUND);
         throw new WebApplicationException(Status.NOT_FOUND);
     }
 }

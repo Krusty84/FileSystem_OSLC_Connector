@@ -41,6 +41,7 @@ import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 import org.eclipse.lyo.oslc4j.core.model.OslcConstants;
 import org.eclipse.lyo.oslc4j.core.model.OslcMediaType;
+import org.apache.log4j.xml.DOMConfigurator;
 import org.eclipse.lyo.oslc4j.core.OSLC4JUtils;
 import org.eclipse.lyo.oslc4j.core.exception.OslcCoreApplicationException;
 import org.eclipse.lyo.oslc4j.core.model.ResourceShape;
@@ -64,10 +65,13 @@ public class ResourceShapeService
     @Context private UriInfo uriInfo;
     @Context private javax.ws.rs.core.Application jaxrsApplication; 
 
-    private static final Logger log = LoggerFactory.getLogger(ResourceShapeService.class.getName());
-
+    //*krusty84, was added for using log4j
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(ResourceShapeService.class.getSimpleName());
+    
     public ResourceShapeService() throws OslcCoreApplicationException, URISyntaxException {
         super();
+        //*krusty84, was added for initialize log4j
+        DOMConfigurator.configure("src/main/resources/log4j.xml");
     }
 
     @GET
@@ -85,6 +89,7 @@ public class ResourceShapeService
             return ResourceShapeFactory.createResourceShape(servletUri, OslcConstants.PATH_RESOURCE_SHAPES,
                     resourceShapePath, resourceClass);
         }
+        logger.error("Fatal Error: "+ Response.Status.NOT_FOUND);
         throw new WebApplicationException(Response.Status.NOT_FOUND);
     }
 
@@ -107,6 +112,7 @@ public class ResourceShapeService
             rd.forward(httpServletRequest,httpServletResponse);
             return;
         }
+        logger.error("Fatal Error: "+Response.Status.NOT_FOUND);
         throw new WebApplicationException(Status.NOT_FOUND);
     }
 }

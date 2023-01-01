@@ -1,0 +1,7 @@
+WebService_FileExposure:154, [DEBUG] 2023-01-01 21:42:19 - ENV variable 'LYO_BASEURL' not defined
+WebService_FileExposure:164, [DEBUG] 2023-01-01 21:42:19 - System (JVM) property 'com.krusty84.fileconnector.servlet.baseurl' not defined
+WebService_FileExposure:177, [INFO ] 2023-01-01 21:42:19 - Found com.krusty84.fileconnector.servlet.baseurl context parameter
+WebService_FileExposure:83, [INFO ] 2023-01-01 21:42:19 - Setting public URI: http://localhost:8181/filesystem-connector
+WebService_FileExposure:85, [INFO ] 2023-01-01 21:42:19 - Setting servlet path: /oslc/
+WebService_FileExposure:93, [INFO ] 2023-01-01 21:42:19 - servletListner contextInitialized.
+CrossOriginFilter:223, [DEBUG] 2023-01-01 21:42:19 - Cross-origin filter configuration: allowedOrigins = *, allowedTimingOrigins = null, allowedMethods = GET,POST,HEAD, allowedHeaders = X-Requested-With,Content-Type,Accept,Origin, preflightMaxAge = 1800, allowCredentials = true,exposedHeaders = ,chainPreflight = true

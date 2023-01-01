@@ -26,8 +26,10 @@ import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import javax.inject.Singleton;
 
 import com.krusty84.fileconnector.RestDelegate;
+import com.krusty84.fileconnector.services.WebService_FileExposure;
 import com.krusty84.fileconnector.ResourcesFactory;
 
+import org.apache.log4j.xml.DOMConfigurator;
 import org.eclipse.lyo.oslc4j.core.OSLC4JUtils;
 // Start of user code imports
 // End of user code
@@ -37,7 +39,8 @@ import org.eclipse.lyo.oslc4j.core.OSLC4JUtils;
 
 public class ApplicationBinder extends AbstractBinder {
 
-    private static final Logger log = LoggerFactory.getLogger(ApplicationBinder.class);
+    //*krusty84, was added for using log4j
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(WebService_FileExposure.class.getSimpleName());
 
     // Start of user code class_attributes
     // End of user code
@@ -47,14 +50,16 @@ public class ApplicationBinder extends AbstractBinder {
 
     public ApplicationBinder()
     {
-        log.info("HK2 contract binding init");
+        //*krusty84, was added for initialize log4j
+    	DOMConfigurator.configure("src/main/resources/log4j.xml");
+        logger.info("HK2 contract binding init");
         //*krusty84, was added call to debug reason
         System.out.println("Was Called: "+ApplicationBinder.class);
     }
 
     @Override
     protected void configure() {
-        log.info("HK2 contract binding start");
+    	logger.info("HK2 contract binding start");
     
         bindAsContract(RestDelegate.class).in(Singleton.class);
         bindFactory(ResourcesFactoryFactory.class).to(ResourcesFactory.class).in(Singleton.class);

@@ -1,0 +1,31 @@
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration debug="true" xmlns:log4j='http://jakarta.apache.org/log4j/'>
+ 
+  <appender name="STDOUT" class="org.apache.log4j.ConsoleAppender">
+    <param name="Target" value="System.out"/>
+    <layout class="org.apache.log4j.PatternLayout">
+    <param name="ConversionPattern" value="%c{1}:%L, [%-5p] %d{yyyy-MM-dd HH:mm:ss} - %m%n" />
+    </layout>
+  </appender>
+
+  <appender name="FILEOUT" class="org.apache.log4j.RollingFileAppender">
+    <param name="File" value="${LOGFILEPATH}\\FileConnector.log"/>
+    <!-- <param name="append" value="false"/> -->
+    <param name="immediateFlush" value="false"/>
+    <param name="MaxFileSize" value="1MB"/>
+    <param name="MaxBackupIndex" value="2"/>
+    <layout class="org.apache.log4j.PatternLayout">
+    <!--  <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n" />-->
+    <param name="ConversionPattern" value="%c{1}:%L, [%-5p] %d{yyyy-MM-dd HH:mm:ss} - %m%n" />
+    </layout>
+  </appender>
+ 
+  <root>
+    <priority value ="all"></priority>
+    <appender-ref ref="STDOUT"></appender-ref>
+    <appender-ref ref="FILEOUT"></appender-ref>
+  </root>
+ 
+</log4j:configuration>
+
+

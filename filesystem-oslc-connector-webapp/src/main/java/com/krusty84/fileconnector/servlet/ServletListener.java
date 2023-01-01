@@ -31,8 +31,10 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.ServletRegistration;
 import javax.ws.rs.core.UriBuilder;
 
+import org.apache.log4j.xml.DOMConfigurator;
 import org.eclipse.lyo.oslc4j.core.OSLC4JUtils;
 import com.krusty84.fileconnector.RestDelegate;
+
 
 // Start of user code imports
 // End of user code
@@ -43,13 +45,17 @@ import com.krusty84.fileconnector.RestDelegate;
  * See getConfigurationProperty() for the different alternatives to set this base URI. 
  */
 public class ServletListener implements ServletContextListener  {
-    private static final Logger logger = LoggerFactory.getLogger(ServletListener.class);
-
+    //*krusty84, was added for using log4j
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(ServletListener.class.getSimpleName());
+    
     // Start of user code class_attributes
     // End of user code
 
     public ServletListener() {
         super();
+        //*krusty84, was added for initialize log4j
+        System.setProperty("LOGFILEPATH",System.getenv("LOG_PATH"));
+        DOMConfigurator.configure("src/main/resources/log4j.xml");
     }
 
     @Override
