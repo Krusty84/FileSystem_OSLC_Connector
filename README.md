@@ -21,6 +21,8 @@ In Eclipse, create the new Run configuration for Maven Build, Goals: **clean ins
 This connector was created based on the following project:
 https://github.com/OSLC/lyo-adaptor-sample-modelling/
 
+Create System Variable: **LOG_PATH** with path to folder for log files
+
 ## Prerequisites
 
 **Eclipse 2022-03 (4.23.0) or 2022-12 (4.26.0)** - Eclipse IDE for Enterprise Java and Web Developers
