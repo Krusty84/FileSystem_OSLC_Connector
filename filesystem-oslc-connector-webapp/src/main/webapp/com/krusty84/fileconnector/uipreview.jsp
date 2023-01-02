@@ -26,6 +26,7 @@
   String resourcePreviewDataSet = (String) request.getAttribute("resourcePreviewDataSet");
 
   String currentFileName = (String) request.getAttribute("Current File:");
+  String currentFileDesc = (String) request.getAttribute("Description:");
   java.util.Date lastModDate = (java.util.Date)request.getAttribute("Last Mod Date:");
 
 %>

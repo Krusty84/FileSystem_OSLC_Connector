@@ -19,9 +19,10 @@
   </adaptorInterfaces>
   <specification>
     <domainSpecifications name="File System" namespaceURI="http://your.organisation.domain/oslc_fsnsp#" namespacePrefix="//@specification/@domainPrefixes[name='oslc_fsnsp']">
-      <resources id="_HXi70X3zEe29AP_nVLJpXg" name="File" description="The resource represents real file(-s) on file system" resourceProperties="_HXi70H3zEe29AP_nVLJpXg _tlYTYH30Ee29AP_nVLJpXg"/>
-      <resourceProperties id="_HXi70H3zEe29AP_nVLJpXg" name="FileName" valueType="String"/>
+      <resources id="_HXi70X3zEe29AP_nVLJpXg" name="File" description="The resource represents real file(-s) on file system" resourceProperties="_HXi70H3zEe29AP_nVLJpXg _tlYTYH30Ee29AP_nVLJpXg _kMAs0IrEEe23Vp_2WlwLeQ"/>
+      <resourceProperties id="_HXi70H3zEe29AP_nVLJpXg" name="FileName" valueType="String" isMemberProperty="true"/>
       <resourceProperties id="_tlYTYH30Ee29AP_nVLJpXg" name="LastModifiedTime" valueType="DateTime"/>
+      <resourceProperties id="_kMAs0IrEEe23Vp_2WlwLeQ" name="FileDescription" valueType="String"/>
     </domainSpecifications>
     <domainPrefixes name="oslc_fsnsp"/>
   </specification>

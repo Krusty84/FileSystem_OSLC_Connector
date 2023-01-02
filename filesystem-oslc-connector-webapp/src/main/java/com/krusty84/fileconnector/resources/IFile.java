@@ -79,8 +79,16 @@ public interface IFile
     @OslcReadOnly(false)
     public Date getLastModifiedTime();
 
+    @OslcName("FileDescription")
+    @OslcPropertyDefinition(Oslc_fsnspDomainConstants.FILE_SYSTEM_NAMSPACE + "FileDescription")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.String)
+    @OslcReadOnly(false)
+    public String getFileDescription();
+
 
     public void setFileName(final String fileName );
     public void setLastModifiedTime(final Date lastModifiedTime );
+    public void setFileDescription(final String fileDescription );
 }
 

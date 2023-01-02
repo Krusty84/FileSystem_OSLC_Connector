@@ -80,6 +80,9 @@ public class File
     // Start of user code attributeAnnotation:lastModifiedTime
     // End of user code
     private Date lastModifiedTime;
+    // Start of user code attributeAnnotation:fileDescription
+    // End of user code
+    private String fileDescription;
     
     // Start of user code classAttributes
     // End of user code
@@ -165,6 +168,20 @@ public class File
         return lastModifiedTime;
     }
 
+    // Start of user code getterAnnotation:fileDescription
+    // End of user code
+    @OslcName("FileDescription")
+    @OslcPropertyDefinition(Oslc_fsnspDomainConstants.FILE_SYSTEM_NAMSPACE + "FileDescription")
+    @OslcOccurs(Occurs.ExactlyOne)
+    @OslcValueType(ValueType.String)
+    @OslcReadOnly(false)
+    public String getFileDescription()
+    {
+        // Start of user code getterInit:fileDescription
+        // End of user code
+        return fileDescription;
+    }
+
     // Start of user code setterAnnotation:fileName
     // End of user code
     public void setFileName(final String fileName )
@@ -184,6 +201,17 @@ public class File
         // End of user code
         this.lastModifiedTime = lastModifiedTime;
         // Start of user code setterFinalize:lastModifiedTime
+        // End of user code
+    }
+
+    // Start of user code setterAnnotation:fileDescription
+    // End of user code
+    public void setFileDescription(final String fileDescription )
+    {
+        // Start of user code setterInit:fileDescription
+        // End of user code
+        this.fileDescription = fileDescription;
+        // Start of user code setterFinalize:fileDescription
         // End of user code
     }
 

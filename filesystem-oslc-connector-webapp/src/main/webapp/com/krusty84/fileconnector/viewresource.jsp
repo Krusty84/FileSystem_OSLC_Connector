@@ -48,6 +48,7 @@
   String catalogUrl = UriBuilder.fromUri(OSLC4JUtils.getServletURI()).path("/catalog/singleton").build().toString();
   
   String currentFileName = (String) request.getAttribute("Current File:");
+  String currentFileDesc = (String) request.getAttribute("Description:");
   java.util.Date lastModDate = (java.util.Date)request.getAttribute("Last Mod Date:");
 %>
 <html lang="en">
@@ -138,6 +139,11 @@
             <div class="col">
                 <p class="text-monospace">
                     <a href="<%=lastModDate%>"><%=lastModDate%></a>
+                </p>
+            </div>
+            <div class="col">
+                <p class="text-monospace">
+                    <a href="<%=currentFileDesc%>"><%=currentFileDesc%></a>
                 </p>
             </div>
         </div>

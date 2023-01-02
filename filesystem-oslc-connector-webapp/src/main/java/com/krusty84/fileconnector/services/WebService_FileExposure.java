@@ -205,8 +205,11 @@ public class WebService_FileExposure
             it needs for transfer some variables into jsp page*/
             httpServletRequest.setAttribute("Current File:", aFile.getFileName());
             httpServletRequest.setAttribute("Last Mod Date:", aFile.getLastModifiedTime());
+            httpServletRequest.setAttribute("Description:", aFile.getFileDescription());
+            //
             logger.info("Current File: "+aFile.getFileName());
             logger.info("Last Mod Date: "+aFile.getLastModifiedTime());
+            logger.info("File Desc: "+aFile.getFileDescription());
             // End of user code
             httpServletRequest.setAttribute("aResource", aFile);
             httpServletRequest.setAttribute("resourceTypeName", Oslc_fsnspDomainConstants.FILE_LOCALNAME);
@@ -276,9 +279,11 @@ public class WebService_FileExposure
             it needs for transfer some variables into jsp page*/
             httpServletRequest.setAttribute("Current File:", aFile.getFileName());
             httpServletRequest.setAttribute("Last Mod Date:", aFile.getLastModifiedTime());
+            httpServletRequest.setAttribute("Description:", aFile.getFileDescription());
             //
             logger.info("Current File: "+aFile.getFileName());
             logger.info("Last Mod Date: "+aFile.getLastModifiedTime());
+            logger.info("File Desc: "+aFile.getFileDescription());
             addCORSHeaders(httpServletResponse);
             return compact;
         }
@@ -309,11 +314,13 @@ public class WebService_FileExposure
                 it needs for transfer some variables into jsp page*/
                 httpServletRequest.setAttribute("Current File:", aFile.getFileName());
                 httpServletRequest.setAttribute("Last Mod Date:", aFile.getLastModifiedTime());
+                httpServletRequest.setAttribute("Description:", aFile.getFileDescription());
                 //
                 logger.info("Current File: "+aFile.getFileName());
                 logger.info("Last Mod Date: "+aFile.getLastModifiedTime());
+                logger.info("File Desc: "+aFile.getFileDescription());
                 //
-                ArrayList<String> getterMethodNames = new ArrayList<String>(Arrays.asList("getFileName", "getLastModifiedTime"));
+                ArrayList<String> getterMethodNames = new ArrayList<String>(Arrays.asList("getFileName", "getLastModifiedTime", "getFileDescription"));
                 // Start of user code getFileAsHtmlSmallPreview_setResourceGetterMethods
                 //TODO: modify the set of attributes to show in the preview
                 // End of user code
@@ -356,10 +363,12 @@ public class WebService_FileExposure
                 it needs for transfer some variables into jsp page*/
                 httpServletRequest.setAttribute("Current File:", aFile.getFileName());
                 httpServletRequest.setAttribute("Last Mod Date:", aFile.getLastModifiedTime());
+                httpServletRequest.setAttribute("Description:", aFile.getFileDescription());
                 //
                 logger.info("Current File: "+aFile.getFileName());
                 logger.info("Last Mod Date: "+aFile.getLastModifiedTime());
-                ArrayList<String> getterMethodNames = new ArrayList<String>(Arrays.asList("getFileName", "getLastModifiedTime"));
+                logger.info("File Desc: "+aFile.getFileDescription());
+                ArrayList<String> getterMethodNames = new ArrayList<String>(Arrays.asList("getFileName", "getLastModifiedTime", "getFileDescription"));
                 // Start of user code getFileAsHtmlLargePreview_setResourceGetterMethods
                 //TODO: modify the set of attributes to show in the preview
                 // End of user code
