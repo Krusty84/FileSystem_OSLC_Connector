@@ -18,25 +18,20 @@ package com.krusty84.fileconnector;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.ServletContextEvent;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.eclipse.lyo.oslc4j.core.model.ServiceProvider;
-import org.apache.log4j.xml.DOMConfigurator;
-import org.eclipse.lyo.oslc4j.core.OSLC4JUtils;
-import org.eclipse.lyo.oslc4j.core.model.AbstractResource;
-import com.krusty84.fileconnector.servlet.ServiceProviderCatalogSingleton;
-import com.krusty84.fileconnector.ServiceProviderInfo;
 import com.krusty84.fileconnector.resources.File;
 import com.krusty84.fileconnector.resources.FileSystemConnect_Helper;
 import com.krusty84.fileconnector.resources.GlobalConstantsVariables;
-import com.krusty84.fileconnector.services.WebService_FileExposure;
+
+import org.apache.log4j.xml.DOMConfigurator;
 
 
 
@@ -89,24 +84,33 @@ public class RestDelegate {
         // Start of user code queryFiles
         // TODO Implement code to return a set of resources.
         //*krusty84, was added call to get Array of found files in folder (aka ServiceProvider)
-        resources= new ArrayList<File>(files.values());
+        resources= new ArrayList<File>(files.values()).stream().skip((page) * limit).limit(limit + 1).collect(Collectors.toList());
         // An empty List should imply that no resources where found.
         // If you encounter problems, consider throwing the runtime exception WebApplicationException(message, cause, final httpStatus)
         // End of user code
         return resources;
     }
+    
     public List<File> FileSelector(HttpServletRequest httpServletRequest, String terms)
     {
-        List<File> resources = null;
-        
-        
-        // Start of user code FileSelector
-        // TODO Implement code to return a set of resources, based on search criteria 
+         List<File> resources = null;    
+         // Start of user code FileSelector
+         // TODO Implement code to return a set of resources, based on search criteria
+         //*krusty84, was added code to search for a file in serviceProvider by  file name
+         resources= new ArrayList<File>(files.values());
+         Iterator<File> filteredFiles = resources.iterator();
+         while (filteredFiles.hasNext()) {
+        	 File fileTemp = filteredFiles.next();
+        	 if (fileTemp.getFileName().contains(terms)!=true) {
+            	 filteredFiles.remove();
+             }
+         }
         // An empty List should imply that no resources where found.
         // If you encounter problems, consider throwing the runtime exception WebApplicationException(message, cause, final httpStatus)
         // End of user code
         return resources;
     }
+    
     public File createFile(HttpServletRequest httpServletRequest, final File aResource)
     {
         File newResource = null;
@@ -125,7 +129,7 @@ public class RestDelegate {
     public File getFile(HttpServletRequest httpServletRequest, final String file_id)
     {
         File aResource = null;
-        // Start of user code getFile
+        // Start of user code getFile 
         // TODO Implement code to return a resource
         //*krusty84, was added call to get specific file in folder (aka ServiceProvider)
         System.out.println("Direct access at the specific resource via URL");

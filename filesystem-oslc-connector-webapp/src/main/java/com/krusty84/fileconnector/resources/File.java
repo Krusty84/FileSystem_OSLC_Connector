@@ -143,6 +143,7 @@ public class File
     @OslcOccurs(Occurs.ExactlyOne)
     @OslcValueType(ValueType.String)
     @OslcReadOnly(false)
+    @OslcMemberProperty(true)
     public String getFileName()
     {
         // Start of user code getterInit:fileName

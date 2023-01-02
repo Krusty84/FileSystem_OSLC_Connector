@@ -69,6 +69,7 @@ public interface IFile
     @OslcOccurs(Occurs.ExactlyOne)
     @OslcValueType(ValueType.String)
     @OslcReadOnly(false)
+    @OslcMemberProperty(true)
     public String getFileName();
 
     @OslcName("LastModifiedTime")
