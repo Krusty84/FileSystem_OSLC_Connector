@@ -152,6 +152,11 @@ public class RestDelegate {
     public String getETagFromFile(final File aResource)
     {
         String eTag = null;
+        /*krusty84, was added 
+         ***
+         */
+        if (aResource != null && aResource.getLastModifiedTime() != null)
+        	eTag = Long.toString(aResource.getLastModifiedTime().getTime());
         // Start of user code getETagFromFile
         // TODO Implement code to return an ETag for a particular resource
         // If you encounter problems, consider throwing the runtime exception WebApplicationException(message, cause, final httpStatus)
