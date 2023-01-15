@@ -15,6 +15,7 @@
     <configuration xsi:type="oslc4j_ai:MavenServerConfiguration" rootServerBaseUrl="http://localhost:8181/" applicationContextPath="/filesystem-connector" servletUrlPattern="/oslc/*" generateJspFilesForOslcUI="true" jettyPort="8181">
       <generalConfiguration filesBasePath="../filesystem-oslc-connector-webapp/" javaBasePackageName="com.krusty84.fileconnector"/>
       <projectConfiguration xsi:type="oslc4j_ai:MavenProjectConfiguration" lyoVersion="5.0.0.Final" groupId="com.krusty84.fileconnector" artifactId="fileconnector" version="0.0.1-SNAPSHOT"/>
+      <authenticationConfiguration applicationName="FS_OAuth" oauthRealm="FS_OAuth"/>
     </configuration>
   </adaptorInterfaces>
   <specification>

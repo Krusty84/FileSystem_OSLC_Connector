@@ -1,0 +1,11 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:j.0="http://eclipse.org/lyo/server/oauth#">
+  <j.0:Consumer>
+    <j.0:consumerName>polarion</j.0:consumerName>
+    <j.0:consumerKey>dd36a834-b9eb-4844-aa1c-061576da2557</j.0:consumerKey>
+    <j.0:consumerSecret>dGVzdA==</j.0:consumerSecret>
+    <j.0:provisional>false</j.0:provisional>
+    <j.0:trusted>true</j.0:trusted>
+  </j.0:Consumer>
+</rdf:RDF>

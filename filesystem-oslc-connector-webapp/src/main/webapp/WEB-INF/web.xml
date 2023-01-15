@@ -42,6 +42,21 @@
 		<servlet-name>JAX-RS Servlet</servlet-name>
 		<url-pattern>/oslc/*</url-pattern>
 	</servlet-mapping>
+	
+  <filter>
+    <display-name>CredentialsFilter</display-name>
+    <filter-name>CredentialsFilter</filter-name>
+    <filter-class>com.krusty84.fileconnector.servlet.CredentialsFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>CredentialsFilter</filter-name>
+    <url-pattern>/oslc/*</url-pattern>
+  </filter-mapping>
+	
+	
+	
+	
+	
 	<!-- Start of user code webxml4 -->
 	<!-- TODO: Add additional configurations here to avoid them be overrriden 
 		upon future re-generation -->

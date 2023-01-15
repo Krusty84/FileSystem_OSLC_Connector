@@ -55,6 +55,7 @@ import io.swagger.v3.jaxrs2.integration.resources.OpenApiResource;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.servers.Server;
+import com.krusty84.fileconnector.services.RootServicesService;
 import com.krusty84.fileconnector.services.ServiceProviderCatalogService;
 import com.krusty84.fileconnector.services.ServiceProviderService;
 import com.krusty84.fileconnector.services.ResourceShapeService;
@@ -107,8 +108,15 @@ public class Application extends javax.ws.rs.core.Application {
         RESOURCE_CLASSES.add(AcceptHeaderOpenApiResource.class);
 
         
-        // Start of user code Custom Resource Classes
-        // End of user code
+        // OAuth resources
+        RESOURCE_CLASSES.add(RootServicesService.class);
+        try {
+            RESOURCE_CLASSES.add(Class.forName("org.eclipse.lyo.server.oauth.webapp.services.ConsumersService"));
+            RESOURCE_CLASSES.add(Class.forName("org.eclipse.lyo.server.oauth.webapp.services.OAuthService"));
+        } catch (ClassNotFoundException e) {
+        		e.printStackTrace();
+        }
+
 
         RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(OslcConstants.PATH_ALLOWED_VALUES,           AllowedValues.class);
         RESOURCE_SHAPE_PATH_TO_RESOURCE_CLASS_MAP.put(OslcConstants.PATH_COMPACT,                  Compact.class);
